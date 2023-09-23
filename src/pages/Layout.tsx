@@ -1,9 +1,10 @@
 import { Link, Outlet } from "react-router-dom";
+import './Layout.css'
 
 function Layout() {
     return (
         <main>
-            <nav>
+            {/* <nav>
                 <ul>
                     <li>
                         <Link to="/">Home</Link>
@@ -20,7 +21,7 @@ function Layout() {
                 </ul>
             </nav>
 
-            <hr />
+            <hr /> */}
 
             <Outlet />
         </main>

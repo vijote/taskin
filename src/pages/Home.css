@@ -1,0 +1,24 @@
+.welcome-image {
+    opacity: 50%;
+    width: 16rem;
+    align-self: center;
+    margin: 1.5rem;
+}
+
+.container {
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    margin-top: 0;
+    align-self: flex-start;
+}
+
+.welcome-label {
+    color: #C6C6D1;
+    align-self: center;
+    font-size: 0.875rem;
+    margin-bottom: 2.25rem;
+}

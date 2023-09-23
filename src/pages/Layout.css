@@ -1,0 +1,22 @@
+:root {
+    --dark-background: #303642;
+    --dark-text: #E8E8ED;
+    --dark-primary: #FF7461;
+    --dark-cta-text: #202020;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+    background-color: var(--dark-background, grey);
+    color: var(--dark-text, #fefefe);
+    font-family: sans-serif;
+}
