@@ -33,6 +33,7 @@ function Register() {
         
         // Save registered user
         localStorage.setItem("userId", response.data.id)
+        localStorage.setItem("userName", name!.toString())
 
         // Redirect to home page
         navigate('/')

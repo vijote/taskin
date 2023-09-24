@@ -2,7 +2,9 @@
     --dark-background: #303642;
     --dark-text: #E8E8ED;
     --dark-primary: #FF7461;
+    --dark-secondary: #944236;
     --dark-cta-text: #202020;
+    --ui-background: #3D4552;
 }
 
 * {
@@ -19,4 +21,19 @@ body {
     background-color: var(--dark-background, grey);
     color: var(--dark-text, #fefefe);
     font-family: sans-serif;
+}
+
+.container {
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.link {
+    color: #FF7461;
+    text-decoration: none;
+}
+
+.mt-1 {
+    margin-top: 1rem;
 }

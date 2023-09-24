@@ -11,7 +11,6 @@ function useQuery<T>() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<AxiosError<HTTPErrorData> | null>(null);
 
-
     const makeQuery = (request: Promise<T>) => {
         setLoading(true);
 

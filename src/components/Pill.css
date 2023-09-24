@@ -1,0 +1,8 @@
+.pill {
+    background-color: #C7424A;
+    padding: 0.5rem;
+    display: inline-block;
+    border-radius: 2rem;
+    font-weight: bold;
+    font-size: 0.75rem;
+}

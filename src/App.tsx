@@ -3,6 +3,8 @@ import Home from "./pages/Home";
 import Layout from "./pages/Layout";
 import Register from "./pages/Register";
 import useApiWakeUp from "./hooks/useApiWakeUp.hook";
+import NewTask from "./pages/NewTask.page";
+import TaskPage from "./pages/Task.page";
 
 export default function App() {
   const { error, loading } = useApiWakeUp()
@@ -15,30 +17,14 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="new-task" element={<NewTask />} />
+        <Route path="task/:taskId" element={<TaskPage />} />
         <Route path="register" element={<Register />} />
 
         {/* not found route */}
         <Route path="*" element={<NoMatch />} />
       </Route>
     </Routes>
-  );
-}
-
-function About() {
-  return (
-    <div>
-      <h2>About</h2>
-    </div>
-  );
-}
-
-function Dashboard() {
-  return (
-    <div>
-      <h2>Dashboard</h2>
-    </div>
   );
 }
 

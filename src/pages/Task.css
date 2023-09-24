@@ -1,0 +1,21 @@
+.task-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit-task-button {
+    min-width: unset;
+    width: unset;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+}
+
+.cancel-editing-button {
+    min-width: unset;
+    width: unset;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    background-color: var(--dark-secondary);
+    color: var(--dark-text);
+}

@@ -6,7 +6,8 @@ interface HTTPRequestOptions {
     method: "POST" | "PUT" | "GET"
     data?: object
     url: string
-    timeout?: number
+    timeout?: number,
+    headers?: Record<string, string>
 }
 
 export interface HTTPLib {

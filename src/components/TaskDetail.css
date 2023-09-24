@@ -1,0 +1,11 @@
+.task-detail-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.change-state {
+    min-width: 7rem;
+    text-align: center;
+}

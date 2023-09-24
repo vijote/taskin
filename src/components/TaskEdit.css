@@ -1,0 +1,10 @@
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pill-dropdown-container {
+    min-width: 7rem;
+    margin-bottom: 1.5rem;
+}

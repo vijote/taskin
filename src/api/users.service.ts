@@ -13,22 +13,17 @@ class UsersService extends APIService {
     }
 
     async register(name: string): Promise<RegisterResponse> {
-        try {
-            const response = await this.http.request<RegisterResponse>({
-                data: { name },
-                method: 'POST',
-                url: '/users'
-            });
+        const response = await this.http.request<RegisterResponse>({
+            data: { name },
+            method: 'POST',
+            url: '/users'
+        });
 
-            if (!response.data) {
-                throw new Error("Empty response!");
-            }
-
-            return response.data;
-        } catch (error) {
-            console.error('Error:', error);
-            throw error;
+        if (!response.data) {
+            throw new Error("Empty response!");
         }
+
+        return response.data;
     }
 }
 

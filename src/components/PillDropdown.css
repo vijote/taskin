@@ -1,0 +1,44 @@
+.pill-dropdown {
+    background-color: var(--ui-background);
+    border: 1px solid var(--dark-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-weight: bold;
+    font-size: 0.75rem;
+    position: relative;
+    cursor: pointer;
+}
+
+.pill-dropdown:focus > .open {
+    display: block;
+}
+
+.dropdown-option-container {
+    position: absolute;
+    display: none;
+
+    background-color: var(--ui-background);
+    border: 1px solid var(--dark-primary);
+    padding: 0.5rem 1rem;
+    left: 0;
+    right: 0;
+    top: 110%;
+    border-radius: 1rem;
+}
+
+.dropdown-option {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid grey;
+}
+
+.dropdown-option:last-of-type {
+    border-bottom: none;
+}
+
+.dropdown-label {
+    align-self: flex-start;
+    font-size: 0.874rem;
+    margin-left: 0.25rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+}

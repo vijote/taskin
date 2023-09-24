@@ -1,14 +1,17 @@
+import { MouseEventHandler } from 'react'
 import './Button.css'
 
 interface ButtonProps {
     type: "button" | "submit" | "reset" | undefined;
     loading: boolean,
     label: string
+    className?: string
+    onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
 function Button(props: ButtonProps) {
     const message = props.loading ? "Procesando..." : props.label
-    return <button className='button' type={props.type} disabled={props.loading}>{message}</button>
+    return <button onClick={props.onClick} className={`button ${props.className || ""}`} type={props.type} disabled={props.loading}>{message}</button>
 }
 
 export default Button;

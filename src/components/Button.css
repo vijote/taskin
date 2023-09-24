@@ -9,5 +9,6 @@
     min-width: 14rem;
     border-radius: 2rem;
     color: var(--dark-cta-text);
+    cursor: pointer;
 }
 

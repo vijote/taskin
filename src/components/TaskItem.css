@@ -1,0 +1,28 @@
+.task-container {
+    display: block;
+    text-decoration: none;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: var(--ui-background);
+    color: #E8E8ED;
+    min-width: 14rem;
+    margin-bottom: 1.5rem;
+}
+
+.task-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.task-created-at {
+    font-size: 0.75rem;
+    margin: 0;
+}
+
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
