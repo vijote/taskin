@@ -36,7 +36,7 @@ function TaskFilters(props: TaskFiltersProps) {
         }
     ]
 
-    const handleFilterChange = (filter: string) => (newValue: string) => {
+    const handleFilterChange = (filter: string) => (newValue?: string) => {
         const newParams = new URLSearchParams(searchParams)
         if (!newValue) newParams.delete(filter)
         else newParams.set(filter, newValue)
