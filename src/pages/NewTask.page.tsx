@@ -1,17 +1,23 @@
-import TasksService, { CreateTaskResponse } from "../api/tasks.service"
+// React specific
+import { Link, useNavigate } from "react-router-dom"
+
+// Components
 import Button from "../components/Button"
 import ErrorMessage from "../components/ErrorMessage"
 import Input from "../components/Input"
 import TextArea from "../components/TextArea"
 import useQuery from "../hooks/useQuery.hook"
 
-import './NewTask.css'
-import AxiosImplementation from "../api/axiosImplementation"
-import { Link, useNavigate } from "react-router-dom"
+// Services
+import { Task, createTasksService } from "../api/tasks.service"
+import { ApiResponse } from "../api/api.service"
 import routes from "./routes"
 
-function NewTask() {
-    const { makeQuery, error, loading } = useQuery<CreateTaskResponse>()
+// Styles
+import './NewTask.css'
+
+function NewTaskPage() {
+    const { makeQuery, error, loading } = useQuery<ApiResponse<Task>>()
     const navigate = useNavigate()
 
     async function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
@@ -20,10 +26,7 @@ function NewTask() {
         const title = formData.get('title')
         const content = formData.get('content')
 
-        const userId = localStorage.getItem("userId") as string
-
-        const tasksService = new TasksService(AxiosImplementation.singleton, userId)
-        const newTaskPromise = tasksService.create(title!.toString(), content!.toString())
+        const newTaskPromise = createTasksService().create(title!.toString(), content!.toString())
         const response = await makeQuery(newTaskPromise)
 
         if (!response.data) return;
@@ -46,4 +49,4 @@ function NewTask() {
     )
 }
 
-export default NewTask
+export default NewTaskPage

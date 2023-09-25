@@ -1,19 +1,13 @@
-import APIService, { HTTPLib } from "./api.service";
-
-export type LoginResponse = {
-    data: {
-        id: string
-    },
-    message: string
-}
+import { HTTPLib, APIService } from "./api.service";
+import AxiosImplementation from "./axiosImplementation";
 
 class UsersService extends APIService {
     constructor(httpLib: HTTPLib) {
         super(httpLib)
     }
 
-    async login(name: string): Promise<LoginResponse> {
-        const response = await this.http.request<LoginResponse>({
+    async login(name: string): Promise<{ id: string}> {
+        const response = await this.request<{ id: string}>({
             data: { name },
             method: 'POST',
             url: '/users'
@@ -25,6 +19,10 @@ class UsersService extends APIService {
 
         return response.data;
     }
+}
+
+export function createUsersService() {
+    return new UsersService(AxiosImplementation.singleton)
 }
 
 export default UsersService

@@ -1,10 +1,5 @@
-import axios, { AxiosInstance } from "axios"; 
-
-interface HTTPRequestOptions {
-    method: "POST" | "PUT" | "GET",
-    data?: object,
-    url: string
-}
+import axios, { AxiosInstance } from "axios";
+import { HTTPLib, HTTPRequestOptions } from "./api.service";
 
 interface HTTPInitOptions {
     baseURL: string,
@@ -12,13 +7,13 @@ interface HTTPInitOptions {
     headers: object
 }
 
-class AxiosImplementation {
+class AxiosImplementation implements HTTPLib {
     private static _singleton: AxiosImplementation | null = null;
 
     public static get singleton() {
-        if (!AxiosImplementation._singleton) {
+        if (!AxiosImplementation._singleton)
             throw new Error('Singleton instance not initialized. Call setSingleton() first.');
-        }
+
         return AxiosImplementation._singleton;
     }
 
@@ -28,14 +23,13 @@ class AxiosImplementation {
         this.instance = newInstance;
     }
 
-    public request(options: HTTPRequestOptions) {
-        return this.instance.request(options);
+    public request<T>(options: HTTPRequestOptions) {
+        return this.instance.request<HTTPRequestOptions, T>(options);
     }
 
     public static setSingleton(options: HTTPInitOptions) {
-        if (!AxiosImplementation._singleton) {
+        if (!AxiosImplementation._singleton)
             AxiosImplementation._singleton = new AxiosImplementation(axios.create(options));
-        }
     }
 }
 

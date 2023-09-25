@@ -1,5 +1,6 @@
+import { ApiResponse } from "../api/api.service";
 import taskState from "../api/taskState";
-import { Task, UpdateTaskResponse, createTasksService } from "../api/tasks.service"
+import { Task, createTasksService } from "../api/tasks.service"
 import useQuery from "../hooks/useQuery.hook";
 import PillDropdown, { Option } from "./PillDropdown"
 
@@ -10,7 +11,8 @@ interface TakDetailProps {
 }
 
 function TaskDetail(props: TakDetailProps) {
-    const { makeQuery } = useQuery<UpdateTaskResponse>()
+    const { makeQuery } = useQuery<ApiResponse<Task>>()
+    
     const options = [
         {
             value: "TO_DO",

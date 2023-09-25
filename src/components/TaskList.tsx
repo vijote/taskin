@@ -1,4 +1,4 @@
-import { GetGroupedTasksResponse } from "../api/tasks.service";
+import { GroupedTasksResponse } from "../api/tasks.service";
 import routes from "../pages/routes";
 import TaskItem from "./TaskItem";
 
@@ -6,14 +6,13 @@ import './TaskList.css'
 import { Link } from "react-router-dom";
 
 interface TaskListProps {
-    data: GetGroupedTasksResponse
+    data: GroupedTasksResponse
 }
 
 function TaskList(props: TaskListProps) {
-
     return (
         <div>
-            {props.data.data.toDo.length ?
+            {props.data.toDo.length ?
                 <div className="section-header">
                     <h3>Por hacer</h3>
                     <Link
@@ -23,13 +22,13 @@ function TaskList(props: TaskListProps) {
                     </Link>
                 </div>
                 : null}
-            {props.data.data.toDo
+            {props.data.toDo
                 .slice(0, 2)
                 .map(task =>
                     <TaskItem data={task} key={task.id} />
                 )}
 
-            {props.data.data.inProgress.length ?
+            {props.data.inProgress.length ?
                 <div className="section-header">
                     <h3>En progreso</h3>
                     <Link
@@ -39,13 +38,13 @@ function TaskList(props: TaskListProps) {
                     </Link>
                 </div>
                 : null}
-            {props.data.data.inProgress
+            {props.data.inProgress
                 .slice(0, 2)
                 .map(task =>
                     <TaskItem data={task} key={task.id} />
                 )}
 
-            {props.data.data.done.length ?
+            {props.data.done.length ?
                 <div className="section-header">
                     <h3>Hecho</h3>
                     <Link
@@ -55,12 +54,12 @@ function TaskList(props: TaskListProps) {
                     </Link>
                 </div>
                 : null}
-            {props.data.data.done
+            {props.data.done
                 .slice(0, 2)
                 .map(task =>
                     <TaskItem data={task} key={task.id} />
                 )}
-            {!props.data.data.done.length && !props.data.data.inProgress.length && !props.data.data.toDo.length
+            {!props.data.done.length && !props.data.inProgress.length && !props.data.toDo.length
                 ? <p>Parece que no hay tareas! Podés comenzar agregando una con el botón verde de aqui abajo</p>
                 : null}
         </div>

@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
 import useQuery from './useQuery.hook';
-import { createTasksService } from '../api/tasks.service';
-import { GetTaskResponse } from '../api/tasks.service'
+import { Task, createTasksService } from '../api/tasks.service';
+import { ApiResponse } from '../api/api.service';
 
 function useTaskFetcherOnMount(id: string) {
-    const { data, error, loading, makeQuery } = useQuery<GetTaskResponse>()
+    const { data, error, loading, makeQuery } = useQuery<ApiResponse<Task>>()
 
     const refetch = () => {
         const tasksService = createTasksService()

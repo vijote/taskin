@@ -1,3 +1,6 @@
+// React specific
+import { useNavigate } from 'react-router-dom';
+
 // Assets
 import taskIcon from '../assets/notes.png';
 
@@ -5,38 +8,39 @@ import taskIcon from '../assets/notes.png';
 import Input from '../components/Input';
 import Button from '../components/Button';
 
+// Hooks
+import useQuery from '../hooks/useQuery.hook';
+
+// Services
+import { createUsersService } from '../api/users.service';
+import routes from './routes';
+
+// Components
+import ErrorMessage from '../components/ErrorMessage';
+
 // Styles
 import './Login.css'
 
-// Hooks
-import useQuery from '../hooks/useQuery.hook';
-import UsersService, { LoginResponse } from '../api/users.service';
-import AxiosImplementation from '../api/axiosImplementation';
-import ErrorMessage from '../components/ErrorMessage';
-import { useNavigate } from 'react-router-dom';
-import routes from './routes';
-
 function LoginPage() {
-    const { makeQuery, error, loading } = useQuery<LoginResponse>()
+    const { makeQuery, error, loading } = useQuery<{ id: string }>()
     const navigate = useNavigate()
 
     async function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
         evt.preventDefault();
         const formData = new FormData(evt.target as HTMLFormElement);
-        const name = formData.get('name')
+        const name = formData.get('name') as string
 
-        const usersService = new UsersService(AxiosImplementation.singleton)
-        const response = await makeQuery(usersService.login(name!.toString()))        
+        const loginPromise = createUsersService().login(name)
+        const response = await makeQuery(loginPromise)
 
-        if(!response.data) return;
-        
+        if (!response) return;
+
         // Save logged user
-        localStorage.setItem("userId", response.data.id)
+        localStorage.setItem("userId", response.id)
         localStorage.setItem("userName", name!.toString())
 
         // Redirect to home page
         navigate(routes.HOME)
-
     }
 
     return (
@@ -46,7 +50,7 @@ function LoginPage() {
             <img src={taskIcon} alt="Taskin welcome image" className='welcome-image' />
             <p className='welcome-label'>Estás a un paso de organizar tus tareas</p>
 
-            {error && error.response ? <ErrorMessage message={error.response.data.error}/> : null}
+            {error && error.response ? <ErrorMessage message={error.response.data.error} /> : null}
             <form onSubmit={handleSubmit}>
                 <Input label='Nombre de usuario' name='name' type='text' />
                 <Button label='Ingresar' loading={loading} type='submit' />

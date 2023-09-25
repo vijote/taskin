@@ -1,20 +1,29 @@
+// React specific
 import { Link, useNavigate } from 'react-router-dom';
+
+// Hooks
 import useTasksFetcher from '../hooks/useTasks.hook';
-import TaskList from '../components/TaskList';
 import useAllTasks from '../hooks/useAllTasks.hook';
-import routes from './routes';
-import './Home.css'
+
+// Components
+import TaskList from '../components/TaskList';
 import TaskSearch from '../components/TaskSearch';
 
-function Home() {
+// Services
+import routes from './routes';
+
+// Styles
+import './Home.css'
+
+function HomePage() {
     const navigate = useNavigate()
-    const { data: tasksResponse, error: tasksError, loading: loadingTasks } = useTasksFetcher()
+    const { data: tasks, error: tasksError, loading: loadingTasks } = useTasksFetcher()
     const { data: tasksCountResponse, error: TaskCountError, loading: loadingTaskCount } = useAllTasks(new URLSearchParams({ isCount: "true" }))
     const userName = localStorage.getItem('userName');
 
     if (tasksError || TaskCountError) return 'Ocurrió un error al obtener las tareas!'
 
-    if (loadingTasks || loadingTaskCount || !tasksResponse) return 'Cargando tareas...'
+    if (loadingTasks || loadingTaskCount || !tasks) return 'Cargando tareas...'
 
     function handleSearch(search: string) {
         const searchParams = new URLSearchParams()
@@ -31,11 +40,11 @@ function Home() {
             </div>
 
             <TaskSearch onSearch={handleSearch} />
-            <TaskList data={tasksResponse} />
+            <TaskList data={tasks} />
 
             <Link to={routes.TASK.NEW} className='new-task'>+</Link>
         </div>
     )
 }
 
-export default Home;
+export default HomePage;

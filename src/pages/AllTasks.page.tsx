@@ -1,10 +1,17 @@
+// React specific
 import { Link, useSearchParams } from "react-router-dom"
+
+// Components
 import TaskItem from "../components/TaskItem";
-import useAllTasks from "../hooks/useAllTasks.hook";
-import routes from "./routes";
 import OrderTasksHeader from "../components/OrderTasksHeader";
-import { Task } from "../api/tasks.service";
 import TaskFilters from "../components/TaskFilters";
+
+// Hooks
+import useAllTasks from "../hooks/useAllTasks.hook";
+
+// Services
+import { Task } from "../api/tasks.service";
+import routes from "./routes";
 
 function AllTasksPage() {
     const [searchParams] = useSearchParams()

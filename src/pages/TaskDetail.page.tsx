@@ -1,22 +1,33 @@
+// React specific
 import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom"
-import useTaskFetcherOnMount from "../hooks/useTaskOnMount"
-import TaskDetail from "../components/TaskDetail"
 
-import './Task.css'
+// Components
+import TaskDetail from "../components/TaskDetail"
 import Button from "../components/Button"
 import TaskEdit from "../components/TaskEdit"
+
+// Hooks
+import useTaskFetcherOnMount from "../hooks/useTaskOnMount"
 import useQuery from "../hooks/useQuery.hook"
-import { DeleteTaskResponse, UpdateTaskResponse, createTasksService } from "../api/tasks.service"
+
+// Services
+import { Task, createTasksService } from "../api/tasks.service"
+import { ApiResponse } from "../api/api.service"
 import routes from "./routes"
 
-function TaskPage() {
+// Styles
+import './TaskDetail.css'
+
+const EDITING_PARAM = "editing"
+
+function TaskDetailPage() {
     const navigate = useNavigate()
     const [searchParams, setSearchParams] = useSearchParams();
     const { taskId } = useParams()
     const { data: response, error, loading, refetch: refetchTask } = useTaskFetcherOnMount(taskId as string)
-    const { makeQuery: makeEditTaskQuery, loading: updateLoading } = useQuery<UpdateTaskResponse>()
-    const { makeQuery: makeDeleteTaskQuery, loading: deleteLoading } = useQuery<DeleteTaskResponse>()
-    const isEditing = searchParams.get("editing")
+    const { makeQuery: makeEditTaskQuery, loading: updateLoading } = useQuery<ApiResponse<Task>>()
+    const { makeQuery: makeDeleteTaskQuery, loading: deleteLoading } = useQuery<ApiResponse<void>>()
+    const isEditing = searchParams.get(EDITING_PARAM)
 
     function onEditButtonClick() {
         const newSearchParams = new URLSearchParams({
@@ -102,4 +113,4 @@ function TaskPage() {
     )
 }
 
-export default TaskPage
+export default TaskDetailPage

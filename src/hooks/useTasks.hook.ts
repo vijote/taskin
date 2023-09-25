@@ -1,8 +1,11 @@
+// React specific
 import { useState, useEffect } from 'react'
-import { GetGroupedTasksResponse, createTasksService } from '../api/tasks.service';
+
+// Services
+import { GroupedTasksResponse, createTasksService } from '../api/tasks.service';
 
 function useTasksFetcher() {
-  const [data, setData] = useState<GetGroupedTasksResponse | null>(null);
+  const [data, setData] = useState<GroupedTasksResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -11,8 +14,8 @@ function useTasksFetcher() {
     setLoading(true);
 
     getTasksPromise
-      .then(data => {
-        setData(data);
+      .then(response => {        
+        setData(response.data);
         setLoading(false)
       })
       .catch((err) => {
