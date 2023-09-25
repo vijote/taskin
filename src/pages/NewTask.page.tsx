@@ -4,7 +4,6 @@ import ErrorMessage from "../components/ErrorMessage"
 import Input from "../components/Input"
 import TextArea from "../components/TextArea"
 import useQuery from "../hooks/useQuery.hook"
-import { FormEvent } from 'react'
 
 import './NewTask.css'
 import AxiosImplementation from "../api/axiosImplementation"
@@ -15,7 +14,7 @@ function NewTask() {
     const { makeQuery, error, loading } = useQuery<CreateTaskResponse>()
     const navigate = useNavigate()
 
-    async function handleSubmit(evt: FormEvent<HTMLFormElement>) {
+    async function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
         evt.preventDefault();
         const formData = new FormData(evt.target as HTMLFormElement);
         const title = formData.get('title')

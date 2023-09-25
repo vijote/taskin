@@ -1,6 +1,6 @@
 import APIService, { HTTPLib } from "./api.service";
 
-export type RegisterResponse = {
+export type LoginResponse = {
     data: {
         id: string
     },
@@ -12,8 +12,8 @@ class UsersService extends APIService {
         super(httpLib)
     }
 
-    async register(name: string): Promise<RegisterResponse> {
-        const response = await this.http.request<RegisterResponse>({
+    async login(name: string): Promise<LoginResponse> {
+        const response = await this.http.request<LoginResponse>({
             data: { name },
             method: 'POST',
             url: '/users'

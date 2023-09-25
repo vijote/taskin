@@ -2,9 +2,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    column-gap: 1rem;
 }
 
 .pill-dropdown-container {
     min-width: 7rem;
     margin-bottom: 1.5rem;
+}
+
+.edit-task-title {
+    width: 100%;
 }

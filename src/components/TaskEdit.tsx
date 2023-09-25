@@ -54,7 +54,7 @@ function TaskEdit(props: TaskEditProps) {
             <h2 className="mt-1">Editar tarea</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-header">
-                    <Input defaultValue={props.title} type="text" label="Titulo" name="title" />
+                    <Input className="edit-task-title" defaultValue={props.title} type="text" label="Titulo" name="title" />
                     <PillDropdown name="state" label="Estado" initialValue={initialValue} options={options}/>
                 </div>
                 <TextArea defaultValue={props.content} label="Descripción" name="content" />

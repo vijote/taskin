@@ -6,7 +6,7 @@
     transform: translateX(-50%);
 
     /* Button styles */
-    background-color: #57DF9E;
+    background-color: var(--dark-done);
     border: none;
     box-shadow: 0px 2px 8px rgba(87, 223, 158, 0.3);
     width: 3.75rem;
@@ -34,4 +34,8 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
+}
+
+.to-do-label {
+    color: var(--dark-done);
 }

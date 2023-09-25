@@ -7,7 +7,7 @@
 }
 
 .IN_PROGRESS {
-    background-color: #427FC7;
+    background-color: #3774B9;
 }
 
 .TO_DO {
@@ -15,5 +15,6 @@
 }
 
 .DONE {
-    background-color: #2D9D67;
+    background-color: var(--dark-done);
+    color: var(--dark-cta-text);
 }

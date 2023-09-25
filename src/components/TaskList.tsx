@@ -10,12 +10,17 @@ interface TaskListProps {
 }
 
 function TaskList(props: TaskListProps) {
+
     return (
         <div>
             {props.data.data.toDo.length ?
                 <div className="section-header">
                     <h3>Por hacer</h3>
-                    <Link className="link" to={routes.TASK.STATE("TO_DO")}>Ver todas</Link>
+                    <Link
+                        className="link"
+                        to={routes.TASK.ALL(new URLSearchParams({ 'filter-state': "TO_DO" }))}>
+                        Ver todas
+                    </Link>
                 </div>
                 : null}
             {props.data.data.toDo
@@ -27,7 +32,11 @@ function TaskList(props: TaskListProps) {
             {props.data.data.inProgress.length ?
                 <div className="section-header">
                     <h3>En progreso</h3>
-                    <Link className="link" to={routes.TASK.STATE("IN_PROGRESS")}>Ver todas</Link>
+                    <Link
+                        className="link"
+                        to={routes.TASK.ALL(new URLSearchParams({ 'filter-state': "IN_PROGRESS" }))}>
+                        Ver todas
+                    </Link>
                 </div>
                 : null}
             {props.data.data.inProgress
@@ -39,7 +48,11 @@ function TaskList(props: TaskListProps) {
             {props.data.data.done.length ?
                 <div className="section-header">
                     <h3>Hecho</h3>
-                    <Link className="link" to={routes.TASK.STATE("DONE")}>Ver todas</Link>
+                    <Link
+                        className="link"
+                        to={routes.TASK.ALL(new URLSearchParams({ 'filter-state': "DONE" }))}>
+                        Ver todas
+                    </Link>
                 </div>
                 : null}
             {props.data.data.done

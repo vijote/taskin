@@ -2,8 +2,10 @@ import { Outlet } from "react-router-dom";
 import './Layout.css'
 
 function Layout() {
+    // Check logged user
+
     return (
-        <main>
+        <main className="main-container">
             <Outlet />
         </main>
     );

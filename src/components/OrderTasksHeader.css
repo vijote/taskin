@@ -12,8 +12,18 @@
     display: flex;
     gap: 0.25rem;
     align-items: center;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+.order-option p {
+    margin: 0;
 }
 
 .asc {
     transform: rotate(180deg);
+}
+
+.order-option-label {
+    font-size: 0.875rem;
 }

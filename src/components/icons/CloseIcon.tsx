@@ -1,20 +1,21 @@
 interface ExpandIconProps {
     size: number
     className?: string
+    onClick?: React.MouseEventHandler
 }
 
-function ExpandIcon(props: ExpandIconProps) {
+function CloseIcon(props: ExpandIconProps) {
     return (
         <svg
-            className={props.className || ""}
+            onClick={props.onClick}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 -960 960 960"
             height={props.size}
             width={props.size}
             fill="#E8E8ED">
-            <path d="M480-345 240-585l56-56 184 184 184-184 56 56-240 240Z" />
+            <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
         </svg>
     )
 }
 
-export default ExpandIcon
+export default CloseIcon

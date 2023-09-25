@@ -4,17 +4,20 @@ import routes from '../pages/routes';
 
 function useLoggedUser() {
     const navigate = useNavigate();
-    const [loadingUser, setLoadingUser] = useState(false);
+    const [loadingUser, setLoadingUser] = useState(true);
 
     useEffect(() => {
+        console.log('effect starting');
         const userId = localStorage.getItem('userId');
 
-        if (!userId) return navigate(routes.USER.REGISTER)
+        if (!userId) return navigate(routes.USER.LOGIN)
 
-        setLoadingUser(true)
+        setLoadingUser(false)
+        console.log('effect done 👍');
+        
     }, []);
 
-    return { loaded: loadingUser, user: localStorage.getItem('userId') };
+    return loadingUser;
 }
 
 export default useLoggedUser;

@@ -1,6 +1,7 @@
 :root {
     --dark-background: #303642;
     --dark-text: #E8E8ED;
+    --dark-done: #57DF9E;
     --dark-primary: #FF7461;
     --dark-secondary: #944236;
     --dark-cta-text: #202020;
@@ -36,4 +37,16 @@ body {
 
 .mt-1 {
     margin-top: 1rem;
+}
+
+.main-container {
+    margin: 0;
+    max-width: unset;
+}
+
+@media (width > 40em) {
+    .main-container {
+        margin: 0 auto;
+        max-width: 40em;
+    }
 }

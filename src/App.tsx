@@ -1,14 +1,14 @@
 import { Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Layout from "./pages/Layout";
-import Register from "./pages/Register";
+import LoginPage from "./pages/Login.page";
 import useApiWakeUp from "./hooks/useApiWakeUp.hook";
 import NewTask from "./pages/NewTask.page";
 import TaskPage from "./pages/Task.page";
 import FilteredByStateTasksPage from "./pages/FilteredByStateTasks.page";
-import FilteredByTitleTasksPage from "./pages/FilteredByTitleTasks.page";
 import AllTasksPage from "./pages/AllTasks.page";
 import routes from "./pages/routes";
+import userLoader from "./loaders/userLoader";
 
 export default function App() {
   const { error, loading } = useApiWakeUp()
@@ -20,17 +20,17 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
+        <Route index loader={userLoader} element={<Home />} />
 
-        <Route path="/task" element={<Layout />}>
+        <Route path="/task" loader={userLoader} element={<Layout />}>
           <Route index element={<AllTasksPage />} />
           <Route path="new" element={<NewTask />} />
           <Route path=":taskId" element={<TaskPage />} />
           <Route path="state/:state" element={<FilteredByStateTasksPage />} />
-          <Route path="title/:search" element={<FilteredByTitleTasksPage />} />
         </Route>
+
         <Route path="/user" element={<Layout />}>
-          <Route path="register" element={<Register />} />
+          <Route path="login" element={<LoginPage />} />
         </Route>
 
         {/* not found route */}

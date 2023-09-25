@@ -1,4 +1,3 @@
-import { MouseEventHandler } from 'react'
 import './Button.css'
 
 interface ButtonProps {
@@ -6,7 +5,7 @@ interface ButtonProps {
     loading: boolean,
     label: string
     className?: string
-    onClick?: MouseEventHandler<HTMLButtonElement>
+    onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
 function Button(props: ButtonProps) {

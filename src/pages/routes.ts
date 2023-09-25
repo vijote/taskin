@@ -1,10 +1,10 @@
 const routes = {
     HOME: "/",
     USER: {
-        REGISTER: "/user/register",
+        LOGIN: "/user/login",
     },
     TASK: {
-        ALL: "/task/",
+        ALL: (params?: URLSearchParams) => params?.size ? `/task?${params.toString()}` : "/task",
         DETAIL: (id: string) => "/task/" + id,
         NEW: "/task/new",
         STATE: (state: string) => "/task/state/" + state,

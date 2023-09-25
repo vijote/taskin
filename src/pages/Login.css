@@ -14,5 +14,13 @@
     color: #C6C6D1;
     align-self: center;
     font-size: 0.875rem;
-    margin-bottom: 2.25rem;
+    margin-bottom: 4.25rem;
+}
+
+.login-label {
+    color: #C6C6D1;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+    display: inline-block;
 }

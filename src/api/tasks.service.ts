@@ -27,7 +27,7 @@ export type GetGroupedTasksResponse = {
 }
 
 export type GetTasksResponse = {
-    data: Task[]
+    data: Task[] | number
     message: string
 }
 
