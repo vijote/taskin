@@ -1,6 +1,6 @@
 .new-task {
     /* Position */
-    position: absolute;
+    position: fixed;
     bottom: 1.5rem;
     left: 50%;
     transform: translateX(-50%);
@@ -23,4 +23,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.home-title {
+    margin: 0;
+}
+
+.all-tasks-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
 }

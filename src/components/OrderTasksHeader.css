@@ -1,0 +1,19 @@
+.order-tasks-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.order-options {
+    display: flex;
+    gap: 2rem;
+}
+
+.order-option {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+}
+
+.asc {
+    transform: rotate(180deg);
+}

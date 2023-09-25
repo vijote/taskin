@@ -5,6 +5,10 @@ import Register from "./pages/Register";
 import useApiWakeUp from "./hooks/useApiWakeUp.hook";
 import NewTask from "./pages/NewTask.page";
 import TaskPage from "./pages/Task.page";
+import FilteredByStateTasksPage from "./pages/FilteredByStateTasks.page";
+import FilteredByTitleTasksPage from "./pages/FilteredByTitleTasks.page";
+import AllTasksPage from "./pages/AllTasks.page";
+import routes from "./pages/routes";
 
 export default function App() {
   const { error, loading } = useApiWakeUp()
@@ -17,9 +21,17 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="new-task" element={<NewTask />} />
-        <Route path="task/:taskId" element={<TaskPage />} />
-        <Route path="register" element={<Register />} />
+
+        <Route path="/task" element={<Layout />}>
+          <Route index element={<AllTasksPage />} />
+          <Route path="new" element={<NewTask />} />
+          <Route path=":taskId" element={<TaskPage />} />
+          <Route path="state/:state" element={<FilteredByStateTasksPage />} />
+          <Route path="title/:search" element={<FilteredByTitleTasksPage />} />
+        </Route>
+        <Route path="/user" element={<Layout />}>
+          <Route path="register" element={<Register />} />
+        </Route>
 
         {/* not found route */}
         <Route path="*" element={<NoMatch />} />
@@ -33,7 +45,7 @@ function NoMatch() {
     <div>
       <h2>Nothing to see here!</h2>
       <p>
-        <Link to="/">Go to the home page</Link>
+        <Link to={routes.HOME}>Go to the home page</Link>
       </p>
     </div>
   );

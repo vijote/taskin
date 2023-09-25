@@ -1,8 +1,19 @@
 .pill {
-    background-color: #C7424A;
     padding: 0.5rem;
     display: inline-block;
     border-radius: 2rem;
     font-weight: bold;
     font-size: 0.75rem;
+}
+
+.IN_PROGRESS {
+    background-color: #427FC7;
+}
+
+.TO_DO {
+    background-color: #C7424A;
+}
+
+.DONE {
+    background-color: #2D9D67;
 }

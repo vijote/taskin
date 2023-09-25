@@ -1,6 +1,7 @@
 import taskState from "../api/taskState";
-import { Task } from "../api/tasks.service"
-import PillDropdown from "./PillDropdown"
+import { Task, UpdateTaskResponse, createTasksService } from "../api/tasks.service"
+import useQuery from "../hooks/useQuery.hook";
+import PillDropdown, { Option } from "./PillDropdown"
 
 import './TaskDetail.css'
 
@@ -9,8 +10,7 @@ interface TakDetailProps {
 }
 
 function TaskDetail(props: TakDetailProps) {
-    console.log(props);
-
+    const { makeQuery, error, loading } = useQuery<UpdateTaskResponse>()
     const options = [
         {
             value: "TO_DO",
@@ -31,11 +31,20 @@ function TaskDetail(props: TakDetailProps) {
         value: props.data.state
     }
 
+    async function onStateChange(newValue: Option) {
+        const promise = createTasksService().update({
+            id: props.data.id as string,
+            state: newValue.value as string
+        })
+
+        await makeQuery(promise)
+    }
+
     return (
         <>
             <div className="task-detail-header">
                 <h2>{props.data.title}</h2>
-                <PillDropdown className="change-state" name="state" initialValue={initialValue} options={options} />
+                <PillDropdown onChange={onStateChange} className="change-state" name="state" initialValue={initialValue} options={options} />
             </div>
             <p>{props.data.content}</p>
         </>

@@ -3,4 +3,5 @@ const taskState: Record<string, string> = {
     IN_PROGRESS: "En progreso",
     DONE: "Hecho"
 }
+
 export default taskState

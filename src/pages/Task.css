@@ -19,3 +19,16 @@
     background-color: var(--dark-secondary);
     color: var(--dark-text);
 }
+
+.delete-task-button {
+    width: unset;
+    min-width: unset;
+    align-self: flex-start;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: normal;
+    margin-top: 2rem;
+    color: var(--dark-primary);
+    background-color: var(--ui-background);
+    border: 1px solid var(--dark-primary);
+}

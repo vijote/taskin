@@ -58,7 +58,7 @@ function TaskEdit(props: TaskEditProps) {
                     <PillDropdown name="state" label="Estado" initialValue={initialValue} options={options}/>
                 </div>
                 <TextArea defaultValue={props.content} label="Descripción" name="content" />
-                <Button className="submit-task-button" label="Agregar" loading={props.submitting} type="submit" />
+                <Button className="submit-task-button" label="Actualizar" loading={props.submitting} type="submit" />
             </form>
         </>
     )

@@ -3,7 +3,7 @@ interface HTTPResponse<T> {
 }
 
 interface HTTPRequestOptions {
-    method: "POST" | "PUT" | "GET"
+    method: "POST" | "PUT" | "GET" | "DELETE"
     data?: object
     url: string
     timeout?: number,

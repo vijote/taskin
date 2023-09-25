@@ -1,18 +1,21 @@
-import { Link, useParams, useSearchParams } from "react-router-dom"
-import useTaskFetcherOnMount from "../hooks/useTaskFetcherOnMount"
+import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom"
+import useTaskFetcherOnMount from "../hooks/useTaskOnMount"
 import TaskDetail from "../components/TaskDetail"
 
 import './Task.css'
 import Button from "../components/Button"
 import TaskEdit from "../components/TaskEdit"
 import useQuery from "../hooks/useQuery.hook"
-import { UpdateTaskResponse, createTasksService } from "../api/tasks.service"
+import { DeleteTaskResponse, UpdateTaskResponse, createTasksService } from "../api/tasks.service"
+import routes from "./routes"
 
 function TaskPage() {
+    const navigate = useNavigate()
     const [searchParams, setSearchParams] = useSearchParams();
     const { taskId } = useParams()
     const { data: response, error, loading, refetch: refetchTask } = useTaskFetcherOnMount(taskId as string)
-    const { makeQuery, loading: updateLoading } = useQuery<UpdateTaskResponse>()
+    const { makeQuery: makeEditTaskQuery, loading: updateLoading } = useQuery<UpdateTaskResponse>()
+    const { makeQuery: makeDeleteTaskQuery, loading: deleteLoading } = useQuery<DeleteTaskResponse>()
     const isEditing = searchParams.get("editing")
 
     function onEditButtonClick() {
@@ -39,10 +42,18 @@ function TaskPage() {
             ...data
         })
 
-        await makeQuery(promise)
+        await makeEditTaskQuery(promise)
 
         clearEditParam()
         refetchTask()
+    }
+
+    async function onDeleteTaskButtonClick() {
+        const promise = createTasksService().delete(taskId as string)
+
+        const deletedTaskResponse = await makeDeleteTaskQuery(promise)
+
+        if(deletedTaskResponse) navigate(routes.HOME)
     }
 
     if (loading || !response) return "Cargando tarea..."
@@ -52,7 +63,7 @@ function TaskPage() {
     return (
         <div className="container">
             <div className="task-page-header">
-                <Link className="link" to="/">Volver al inicio</Link>
+                <Link className="link" to={routes.HOME}>Volver al inicio</Link>
                 {!isEditing && <Button
                     onClick={onEditButtonClick}
                     label="Editar"
@@ -76,7 +87,17 @@ function TaskPage() {
                     submitting={updateLoading}
                     onSubmit={onEditSubmit}
                 />
-                : <TaskDetail data={response.data} />}
+                : <TaskDetail
+                    data={response.data}
+                />
+            }
+            <Button
+                className="delete-task-button"
+                label="Eliminar tarea"
+                loading={deleteLoading}
+                type="button"
+                onClick={onDeleteTaskButtonClick}
+            />
         </div>
     )
 }

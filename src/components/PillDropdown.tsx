@@ -1,5 +1,6 @@
 import { useState, ReactNode } from 'react';
 import './PillDropdown.css';
+import ExpandIcon from './icons/ExpandIcon';
 
 interface PillOptionProps {
     label: string,
@@ -7,7 +8,7 @@ interface PillOptionProps {
     value: unknown,
 }
 
-type Option = {
+export type Option = {
     label: string
     value: ReactNode
 }
@@ -18,6 +19,7 @@ interface PillDropdownProps {
     label?: string
     name: string
     className?: string
+    onChange?: Function
 }
 
 function PillDropdown(props: PillDropdownProps) {
@@ -30,6 +32,8 @@ function PillDropdown(props: PillDropdownProps) {
 
     const onOptionClick = (newValue: Option) => () => {
         setSelectedOption(newValue)
+
+        if(props.onChange) props.onChange(newValue)
     }
 
     return (
@@ -37,6 +41,7 @@ function PillDropdown(props: PillDropdownProps) {
             <label className='dropdown-label' htmlFor={props.name}>{props.label}</label>
             <div className={`pill-dropdown ${props.className || ''}`} tabIndex={0} onClick={toggleDropdown} onBlur={() => setIsDropdownOpen(false)}>
                 <span>{selectedOption.label}</span>
+                <ExpandIcon size={16}/>
                 <div className={`dropdown-option-container ${isDropdownOpen ? 'open' : ''}`}>
                     {props.options.map(option => <PillOption
                         key={option.label}

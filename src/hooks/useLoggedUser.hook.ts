@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
+import routes from '../pages/routes';
 
 function useLoggedUser() {
     const navigate = useNavigate();
@@ -8,7 +9,7 @@ function useLoggedUser() {
     useEffect(() => {
         const userId = localStorage.getItem('userId');
 
-        if (!userId) return navigate('/register')
+        if (!userId) return navigate(routes.USER.REGISTER)
 
         setLoadingUser(true)
     }, []);

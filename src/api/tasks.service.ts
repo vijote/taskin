@@ -13,12 +13,21 @@ export type UpdateTaskResponse = {
     message: string
 }
 
-export type GetTasksResponse = {
+export type DeleteTaskResponse = {
+    message: string
+}
+
+export type GetGroupedTasksResponse = {
     data: {
         toDo: Task[]
         inProgress: Task[]
         done: Task[]
     }
+    message: string
+}
+
+export type GetTasksResponse = {
+    data: Task[]
     message: string
 }
 
@@ -33,6 +42,12 @@ export type Task = {
     title: string
     content: string
     state: string
+}
+
+export interface GetTasksOptions {
+    isCount?: boolean
+    title?: string
+    state?: string
 }
 
 interface UpdateTaskOptions {
@@ -71,10 +86,42 @@ class TasksService extends APIService {
         return response.data;
     }
 
-    async getAll(): Promise<GetTasksResponse> {
+    async getAllGroupedByState(): Promise<GetGroupedTasksResponse> {
+        const response = await this.http.request<GetGroupedTasksResponse>({
+            method: 'GET',
+            url: '/tasks/grouped-by-state',
+            headers: {
+                "user-id": this.userId
+            }
+        });
+
+        if (!response.data) {
+            throw new Error("Empty response!");
+        }
+
+        return response.data;
+    }
+
+    async getAllByTitle(search: string): Promise<GetTasksResponse> {
         const response = await this.http.request<GetTasksResponse>({
             method: 'GET',
-            url: '/tasks',
+            url: `/tasks/filter-by-title/${encodeURIComponent(search)}`,
+            headers: {
+                "user-id": this.userId
+            }
+        });
+
+        if (!response.data) {
+            throw new Error("Empty response!");
+        }
+
+        return response.data;
+    }
+
+    async getAll(options: URLSearchParams): Promise<GetTasksResponse> {
+        const response = await this.http.request<GetTasksResponse>({
+            method: 'GET',
+            url: `/tasks${options.size ? "?" + options.toString() : ""}`,
             headers: {
                 "user-id": this.userId
             }
@@ -107,7 +154,39 @@ class TasksService extends APIService {
         const response = await this.http.request<UpdateTaskResponse>({
             data: options,
             method: 'PUT',
-            url: `/tasks/${options.id}`,
+            url: `/tasks/${encodeURIComponent(options.id)}`,
+            headers: {
+                "user-id": this.userId
+            }
+        });
+
+        if (!response.data) {
+            throw new Error("Empty response!");
+        }
+
+        return response.data;
+    }
+
+    async delete(id: string) {
+        const response = await this.http.request<UpdateTaskResponse>({
+            method: 'DELETE',
+            url: `/tasks/${encodeURIComponent(id)}`,
+            headers: {
+                "user-id": this.userId
+            }
+        });
+
+        if (!response.data) {
+            throw new Error("Empty response!");
+        }
+
+        return response.data;
+    }
+
+    async getByState(state: string) {
+        const response = await this.http.request<GetTasksResponse>({
+            method: 'GET',
+            url: `/tasks/filter-by-state/${encodeURIComponent(state)}`,
             headers: {
                 "user-id": this.userId
             }

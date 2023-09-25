@@ -8,7 +8,8 @@ import { FormEvent } from 'react'
 
 import './NewTask.css'
 import AxiosImplementation from "../api/axiosImplementation"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import routes from "./routes"
 
 function NewTask() {
     const { makeQuery, error, loading } = useQuery<CreateTaskResponse>()
@@ -29,12 +30,13 @@ function NewTask() {
         if (!response.data) return;
 
         // Redirect to home page
-        navigate('/')
+        navigate(routes.HOME)
     }
 
     return (
         <div className="container">
-            <h2 className="title">Crear tarea</h2>
+            <Link to={routes.HOME} className="link">Volver al inicio</Link>
+            <h2 className="new-task-title">Crear tarea</h2>
             {!loading && error && error.response ? <ErrorMessage message={error.response.data.error} /> : null}
             <form onSubmit={handleSubmit}>
                 <Input type="text" label="Titulo" name="title" />

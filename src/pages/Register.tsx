@@ -16,6 +16,7 @@ import UsersService, { RegisterResponse } from '../api/users.service';
 import AxiosImplementation from '../api/axiosImplementation';
 import ErrorMessage from '../components/ErrorMessage';
 import { useNavigate } from 'react-router-dom';
+import routes from './routes';
 
 function Register() {
     const { makeQuery, error, loading } = useQuery<RegisterResponse>()
@@ -36,7 +37,7 @@ function Register() {
         localStorage.setItem("userName", name!.toString())
 
         // Redirect to home page
-        navigate('/')
+        navigate(routes.HOME)
     }
 
     return (
