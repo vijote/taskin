@@ -1,7 +1,7 @@
 {
   "name": "taskin",
   "engines": {
-    "node": "20.7.0"
+    "node": "18.18.0"
   },
   "private": true,
   "version": "0.0.0",
