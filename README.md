@@ -1,27 +1,21 @@
-# React + TypeScript + Vite
+# Taskin: React + TypeScript app
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- Esta app fue desarrollada usando React 18 y Typescript 5.
+- Por favor también descargue la [API Rest](https://github.com/vijote/taskin-api/) para tener el entorno completo:
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+## Instalación local
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+La aplicación fue desarrollada usando Node `20.7.0`, por favor utilice esta versión, versiones diferentes pueden presentar diferencias.
 
-- Configure the top-level `parserOptions` property like this:
+- También deberá crear un archivo .env:
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+```
+   # Url de la API Rest
+   VITE_API_URL=http://localhost:8000
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Deploy en la nube
+Puede visitar esta app en el [deploy en Netlify](https://amazing-hamster-e1e505.netlify.app/)
+- La api tambien se encuentra [deployada en Render](https://taskin.onrender.com/) (Puede demorar unos minutos en despertar el servicio)
