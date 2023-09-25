@@ -10,7 +10,7 @@ interface TaskEditProps {
     title: string
     content: string
     state: string
-    onSubmit: Function
+    onSubmit: (formData: Record<string, string>) => unknown
     submitting: boolean
 }
 

@@ -5,7 +5,7 @@ import CloseIcon from './icons/CloseIcon';
 
 interface PillOptionProps {
     label: string,
-    onClick: Function
+    onClick: (value: unknown) => unknown
     value: unknown,
 }
 
@@ -22,7 +22,7 @@ interface PillDropdownProps {
     className?: string
     onChange?: (newValue: Option) => unknown
     removeEnabled?: boolean
-    onRemove?: Function
+    onRemove?: () => void
 }
 
 function PillDropdown(props: PillDropdownProps) {
