@@ -1,0 +1,9 @@
+.loading-service {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 6rem;
+    align-items: center;
+    transform: translateY(-10%);
+}

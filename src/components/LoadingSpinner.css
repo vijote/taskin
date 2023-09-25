@@ -1,0 +1,25 @@
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner {
+    border: 1rem solid rgba(0, 0, 0, 0.3);
+    border-top: 1rem solid var(--dark-primary);
+    /* Change the spinner color */
+    border-radius: 50%;
+    width: 10rem;
+    height: 10rem;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

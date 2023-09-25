@@ -12,6 +12,7 @@ import useAllTasks from "../hooks/useAllTasks.hook";
 // Services
 import { Task } from "../api/tasks.service";
 import routes from "./routes";
+import LoadingService from "../components/LoadingService";
 
 function AllTasksPage() {
     const [searchParams] = useSearchParams()
@@ -24,7 +25,7 @@ function AllTasksPage() {
 
     if (error) return "Ocurrió un error al obtener las tareas!"
 
-    if (loading || !response) return "Cargando tareas..."
+    if (loading || !response) return <LoadingService message="Cargando tareas"/>
 
     return (
         <section className="container">

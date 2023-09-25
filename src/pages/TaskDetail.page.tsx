@@ -17,6 +17,7 @@ import routes from "./routes"
 
 // Styles
 import './TaskDetail.css'
+import LoadingService from "../components/LoadingService"
 
 const EDITING_PARAM = "editing"
 
@@ -67,7 +68,7 @@ function TaskDetailPage() {
         if(deletedTaskResponse) navigate(routes.HOME)
     }
 
-    if (loading || !response) return "Cargando tarea..."
+    if (loading || !response) return <LoadingService message="Cargando tarea" />
 
     if (error) return "Error al cargar la tarea!"
 

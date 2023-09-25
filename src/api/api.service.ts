@@ -31,10 +31,10 @@ export class APIService {
     }
 
     public checkApiStatus() {
-        return this.http.request({
+        return this.http.request<string>({
             method: "GET",
             url: '/',
-            timeout: 100_000
+            timeout: 500_000
         })
     }
 }

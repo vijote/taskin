@@ -24,3 +24,7 @@
     margin-left: 0.5rem;
     display: inline-block;
 }
+
+#root {
+    height: 100%;
+}

@@ -7,7 +7,7 @@
 
 ## Instalación local
 
-La aplicación fue desarrollada usando Node `20.7.0`, por favor utilice esta versión, versiones diferentes pueden presentar diferencias.
+- La aplicación fue desarrollada usando Node `20.7.0`, por favor utilice esta versión.
 
 - También deberá crear un archivo .env:
 
