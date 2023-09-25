@@ -10,7 +10,7 @@ interface TakDetailProps {
 }
 
 function TaskDetail(props: TakDetailProps) {
-    const { makeQuery, error, loading } = useQuery<UpdateTaskResponse>()
+    const { makeQuery } = useQuery<UpdateTaskResponse>()
     const options = [
         {
             value: "TO_DO",

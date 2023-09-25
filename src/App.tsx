@@ -5,7 +5,6 @@ import LoginPage from "./pages/Login.page";
 import useApiWakeUp from "./hooks/useApiWakeUp.hook";
 import NewTask from "./pages/NewTask.page";
 import TaskPage from "./pages/Task.page";
-import FilteredByStateTasksPage from "./pages/FilteredByStateTasks.page";
 import AllTasksPage from "./pages/AllTasks.page";
 import routes from "./pages/routes";
 import userLoader from "./loaders/userLoader";
@@ -26,7 +25,6 @@ export default function App() {
           <Route index element={<AllTasksPage />} />
           <Route path="new" element={<NewTask />} />
           <Route path=":taskId" element={<TaskPage />} />
-          <Route path="state/:state" element={<FilteredByStateTasksPage />} />
         </Route>
 
         <Route path="/user" element={<Layout />}>
