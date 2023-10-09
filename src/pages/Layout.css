@@ -33,6 +33,7 @@ body {
 .link {
     color: #FF7461;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .mt-1 {

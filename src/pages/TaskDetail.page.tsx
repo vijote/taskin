@@ -5,10 +5,11 @@ import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom"
 import TaskDetail from "../components/TaskDetail"
 import Button from "../components/Button"
 import TaskEdit from "../components/TaskEdit"
+import LoadingService from "../components/LoadingService"
 
 // Hooks
-import useTaskFetcherOnMount from "../hooks/useTaskOnMount"
-import useQuery from "../hooks/useQuery.hook"
+import useTask from "../hooks/useTask"
+import useQueryError from "../hooks/useQueryError.hook"
 
 // Services
 import { Task, createTasksService } from "../api/tasks.service"
@@ -17,17 +18,19 @@ import routes from "./routes"
 
 // Styles
 import './TaskDetail.css'
-import LoadingService from "../components/LoadingService"
+import useTitle from "../hooks/useTitle.hook"
 
 const EDITING_PARAM = "editing"
 
 function TaskDetailPage() {
+    useTitle("Detalle de tarea | Taskin", { restoreOnUnmount: true })
+    
     const navigate = useNavigate()
     const [searchParams, setSearchParams] = useSearchParams();
     const { taskId } = useParams()
-    const { data: response, error, loading, refetch: refetchTask } = useTaskFetcherOnMount(taskId as string)
-    const { makeQuery: makeEditTaskQuery, loading: updateLoading } = useQuery<ApiResponse<Task>>()
-    const { makeQuery: makeDeleteTaskQuery, loading: deleteLoading } = useQuery<ApiResponse<void>>()
+    const { data: response, loading, refetch } = useTask(taskId as string)
+    const { makeQuery: makeEditTaskQuery, error: errorEditing, loading: updateLoading, resetState } = useQueryError<ApiResponse<Task>>()
+    const { makeQuery: makeDeleteTaskQuery, loading: deleteLoading } = useQueryError<ApiResponse<void>>()
     const isEditing = searchParams.get(EDITING_PARAM)
 
     function onEditButtonClick() {
@@ -46,6 +49,7 @@ function TaskDetailPage() {
 
     function onCancelEditingButtonClick() {
         clearEditParam()
+        resetState()
     }
 
     async function onEditSubmit(data: object) {
@@ -57,7 +61,7 @@ function TaskDetailPage() {
         await makeEditTaskQuery(promise)
 
         clearEditParam()
-        refetchTask()
+        refetch()
     }
 
     async function onDeleteTaskButtonClick() {
@@ -65,12 +69,10 @@ function TaskDetailPage() {
 
         const deletedTaskResponse = await makeDeleteTaskQuery(promise)
 
-        if(deletedTaskResponse) navigate(routes.HOME)
+        if (deletedTaskResponse) navigate(routes.HOME)
     }
 
     if (loading || !response) return <LoadingService message="Cargando tarea" />
-
-    if (error) return "Error al cargar la tarea!"
 
     return (
         <div className="container">
@@ -93,6 +95,7 @@ function TaskDetailPage() {
             </div>
             {isEditing
                 ? <TaskEdit
+                    error={errorEditing?.response?.data.error}
                     state={response.data.state}
                     content={response.data.content}
                     title={response.data.title}

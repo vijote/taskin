@@ -1,0 +1,14 @@
+.error-container {
+    height: 30svh;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.error-container > img {
+    height: 100%;
+    margin-bottom: 2rem;
+}
+
+.error-container > h2 {
+    margin-bottom: 2rem;
+}

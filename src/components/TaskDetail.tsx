@@ -36,6 +36,8 @@ function TaskDetail(props: TakDetailProps) {
     async function onStateChange(newValue: Option) {
         const promise = createTasksService().update({
             id: props.data.id as string,
+            content: props.data.content,
+            title: props.data.title,
             state: newValue.value as string
         })
 

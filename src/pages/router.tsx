@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // Loaders
 import apiLoader from "../loaders/apiLoader";
-import userLoader from "../loaders/userLoader";
+import homeLoader from "../loaders/homeLoader";
 
 // Pages
 import Layout from "./Layout";
@@ -17,6 +17,8 @@ import TaskDetailPage from "./TaskDetail.page";
 import AxiosImplementation from "../api/axiosImplementation";
 import ErrorBoundary from "./ErrorBoundary";
 import NotFoundPage from "./NotFound.page";
+import userLoader from "../loaders/userLoader";
+import FetchingError from "../errors/FetchingError";
 
 AxiosImplementation.setSingleton({
     baseURL: import.meta.env.VITE_API_URL,
@@ -32,12 +34,13 @@ const router = createBrowserRouter([
         path: "/",
         loader: apiLoader,
         element: <Layout />,
-        errorElement: <ErrorBoundary/>,
+        errorElement: <ErrorBoundary />,
         children: [
             {
                 index: true,
                 element: <HomePage />,
-                loader: userLoader
+                loader: homeLoader,
+                errorElement: <FetchingError message='Ocurrió un error al cargar las tareas!' />,
             },
             {
                 path: 'user',
@@ -52,6 +55,7 @@ const router = createBrowserRouter([
                 children: [
                     {
                         index: true,
+                        errorElement: <FetchingError message="Ocurrió un error al obtener las tareas!" />,
                         element: <AllTasksPage />
                     },
                     {
@@ -60,6 +64,7 @@ const router = createBrowserRouter([
                     },
                     {
                         path: ':taskId',
+                        errorElement: <FetchingError message="Ocurrió un error al cargar la tarea!" />,
                         element: <TaskDetailPage />
                     },
                 ]

@@ -3,8 +3,8 @@ import useQuery from './useQuery.hook';
 import { Task, createTasksService } from '../api/tasks.service';
 import { ApiResponse } from '../api/api.service';
 
-function useTaskFetcherOnMount(id: string) {
-    const { data, error, loading, makeQuery } = useQuery<ApiResponse<Task>>()
+function useTask(id: string) {
+    const { data, loading, makeQuery } = useQuery<ApiResponse<Task>>()
 
     const refetch = () => {
         const tasksService = createTasksService()
@@ -14,14 +14,13 @@ function useTaskFetcherOnMount(id: string) {
     }
 
     useEffect(() => {
-
         const tasksService = createTasksService()
         const getTaskPromise = tasksService.get(id)
 
         makeQuery(getTaskPromise)
     }, []);
 
-    return { data, error, loading, refetch }
+    return { data, loading, refetch }
 }
 
-export default useTaskFetcherOnMount 
+export default useTask 

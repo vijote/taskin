@@ -4,7 +4,12 @@ import { redirect } from "react-router-dom"
 //Services
 import routes from "../pages/routes";
 
-function userLoader() {
+export type User = {
+    name: string,
+    id: string
+}
+
+function userLoader(): User | Response {
     const userId = localStorage.getItem('userId');
     const userName = localStorage.getItem('userName');
 

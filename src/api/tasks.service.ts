@@ -47,7 +47,7 @@ class TasksService extends APIService {
         });
     }
 
-    async getAll(options: URLSearchParams): Promise<ApiResponse<Task[]>> {
+    async getAll(options: URLSearchParams): Promise<ApiResponse<Task[] | number>> {
         const queryString = options.toString();
 
         return this.request<Task[]>({
@@ -63,7 +63,7 @@ class TasksService extends APIService {
         });
     }
 
-    async update(options: Partial<Task>): Promise<ApiResponse<Task>> {
+    async update(options: Partial<Omit<Task, "createdAt">>): Promise<ApiResponse<Task>> {
         return this.request<Task>({
             method: 'PUT',
             url: `/tasks/${encodeURIComponent(options.id!)}`,

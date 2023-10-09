@@ -5,6 +5,7 @@ import PillDropdown from "./PillDropdown"
 import TextArea from "./TextArea"
 
 import './TaskEdit.css'
+import ErrorMessage from "./ErrorMessage"
 
 interface TaskEditProps {
     title: string
@@ -12,6 +13,7 @@ interface TaskEditProps {
     state: string
     onSubmit: (formData: Record<string, string>) => unknown
     submitting: boolean
+    error?: string
 }
 
 function TaskEdit(props: TaskEditProps) {
@@ -52,6 +54,7 @@ function TaskEdit(props: TaskEditProps) {
     return (
         <>
             <h2 className="mt-1">Editar tarea</h2>
+            {props.error ? <ErrorMessage message={props.error}/> : null}
             <form onSubmit={handleSubmit}>
                 <div className="form-header">
                     <Input className="edit-task-title" defaultValue={props.title} type="text" label="Titulo" name="title" />

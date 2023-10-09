@@ -9,7 +9,7 @@ import Input from '../components/Input';
 import Button from '../components/Button';
 
 // Hooks
-import useQuery from '../hooks/useQuery.hook';
+import useQueryError from '../hooks/useQueryError.hook';
 
 // Services
 import { createUsersService } from '../api/users.service';
@@ -20,9 +20,11 @@ import ErrorMessage from '../components/ErrorMessage';
 
 // Styles
 import './Login.css'
+import useTitle from '../hooks/useTitle.hook';
 
 function LoginPage() {
-    const { makeQuery, error, loading } = useQuery<{ id: string }>()
+    useTitle("Ingresar | Taskin", { restoreOnUnmount: true })
+    const { makeQuery, error, loading } = useQueryError<{ id: string }>()
     const navigate = useNavigate()
 
     async function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {

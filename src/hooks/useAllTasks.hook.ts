@@ -4,7 +4,7 @@ import useQuery from "./useQuery.hook"
 import { ApiResponse } from '../api/api.service'
 
 function useAllTasks(initialOptions: URLSearchParams) {
-    const { data, error, loading, makeQuery } = useQuery<ApiResponse<Task[]> | ApiResponse<number>>()
+    const { data, loading, makeQuery } = useQuery<ApiResponse<Task[] | number> | ApiResponse<number>>()
 
     const refetch = (options: URLSearchParams) => {
         const tasksService = createTasksService()
@@ -17,7 +17,7 @@ function useAllTasks(initialOptions: URLSearchParams) {
         refetch(initialOptions)
     }, []);
 
-    return { data, error, loading, refetch }
+    return { data, loading, refetch }
 }
 
 export default useAllTasks

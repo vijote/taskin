@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom"
 import routes from "./routes"
+import useTitle from "../hooks/useTitle.hook"
 
 function NotFoundPage() {
+    useTitle("Pagina no encontrada | Taskin", { restoreOnUnmount: true })
     return (
         <div className="container">
             <h2>Esta página no existe</h2>

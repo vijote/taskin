@@ -6,18 +6,23 @@ import Button from "../components/Button"
 import ErrorMessage from "../components/ErrorMessage"
 import Input from "../components/Input"
 import TextArea from "../components/TextArea"
-import useQuery from "../hooks/useQuery.hook"
 
 // Services
 import { Task, createTasksService } from "../api/tasks.service"
 import { ApiResponse } from "../api/api.service"
 import routes from "./routes"
 
+// Hooks
+import useQueryError from "../hooks/useQueryError.hook"
+
 // Styles
 import './NewTask.css'
+import useTitle from "../hooks/useTitle.hook"
 
 function NewTaskPage() {
-    const { makeQuery, error, loading } = useQuery<ApiResponse<Task>>()
+    useTitle("Nueva tarea | Taskin", { restoreOnUnmount: true })
+    
+    const { makeQuery, error, loading } = useQueryError<ApiResponse<Task>>()
     const navigate = useNavigate()
 
     async function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
@@ -27,7 +32,7 @@ function NewTaskPage() {
         const content = formData.get('content')
 
         const newTaskPromise = createTasksService().create(title!.toString(), content!.toString())
-        const response = await makeQuery(newTaskPromise)
+        const response = await makeQuery(newTaskPromise) as ApiResponse<Task>
 
         if (!response.data) return;
 
