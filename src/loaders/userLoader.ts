@@ -9,7 +9,7 @@ export type User = {
     id: string
 }
 
-function userLoader(): User | Response {
+function userLoader() {
     const userId = localStorage.getItem('userId');
     const userName = localStorage.getItem('userName');
 
@@ -18,7 +18,7 @@ function userLoader(): User | Response {
     return {
         name: userName,
         id: userId
-    }
+    } as User
 }
 
 export default userLoader

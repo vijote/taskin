@@ -3,7 +3,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // Loaders
 import apiLoader from "../loaders/apiLoader";
-import homeLoader from "../loaders/homeLoader";
 
 // Pages
 import Layout from "./Layout";
@@ -39,7 +38,8 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <HomePage />,
-                loader: homeLoader,
+                loader: userLoader,
+                id: "home",
                 errorElement: <FetchingError message='Ocurrió un error al cargar las tareas!' />,
             },
             {

@@ -47,10 +47,10 @@ class TasksService extends APIService {
         });
     }
 
-    async getAll(options: URLSearchParams): Promise<ApiResponse<Task[] | number>> {
+    async getAll<T>(options: URLSearchParams): Promise<ApiResponse<T>> {
         const queryString = options.toString();
 
-        return this.request<Task[]>({
+        return this.request<T>({
             method: 'GET',
             url: `/tasks${queryString ? '?' + queryString : ''}`,
         });

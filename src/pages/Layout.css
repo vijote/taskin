@@ -43,6 +43,7 @@ body {
 .main-container {
     margin: 0;
     max-width: unset;
+    height: 100%;
 }
 
 @media (width > 40em) {

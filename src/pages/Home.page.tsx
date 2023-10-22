@@ -1,11 +1,9 @@
 // React specific
-import { Await, Link, useNavigate, useLoaderData } from 'react-router-dom';
-import { Suspense } from 'react';
+import { Link, useNavigate, useRouteLoaderData } from 'react-router-dom';
 
 // Components
 import TaskList from '../components/TaskList';
 import TaskSearch from '../components/TaskSearch';
-import LoadingService from '../components/LoadingService';
 
 // Services
 import routes from './routes';
@@ -14,16 +12,17 @@ import { GroupedTasksResponse } from '../api/tasks.service';
 // Styles
 import './Home.css'
 
-// Loaders
-import { HomeLoaderResponse } from '../loaders/homeLoader';
-
 // Hooks
 import useTitle from '../hooks/useTitle.hook';
+import useHomeData from '../hooks/useHomeData.hook';
+import LoadingService from '../components/LoadingService';
+import { User } from '../loaders/userLoader';
 
 function HomePage() {
     useTitle("Inicio | Taskin", { restoreOnUnmount: true })
-
+    const user = useRouteLoaderData("home") as User
     const navigate = useNavigate()
+    const { data, loading } = useHomeData();
 
     function handleSearch(search: string) {
         const searchParams = new URLSearchParams()
@@ -31,30 +30,24 @@ function HomePage() {
         navigate(routes.TASK.ALL(searchParams))
     }
 
-    const data = useLoaderData();
+    if (loading || !data) return <LoadingService message='Cargando tareas' />
+
+    const [tasks, count] = data
 
     return (
-        <Suspense
-            fallback={<LoadingService message="Cargando tareas" />}>
-            <Await
-                resolve={data}>
-                {(awaitedData: HomeLoaderResponse) => (
-                    <div className='container'>
-                        <h2 className='home-title'>Hola, {awaitedData.userName}</h2>
-                        <div className='all-tasks-header'>
-                            <p className='to-do-label'>{awaitedData.count.data as number} tareas encontradas</p>
-                            <Link to={routes.TASK.ALL()} className='link'>Ver todas</Link>
-                        </div>
+        <div className='container'>
+            <h2 className='home-title'>Hola, {user.name}</h2>
+            <div className='all-tasks-header'>
+                <p className='to-do-label'>{count.data as number} tareas encontradas</p>
+                <Link to={routes.TASK.ALL()} className='link'>Ver todas</Link>
+            </div>
 
-                        <TaskSearch onSearch={handleSearch} />
-                        <TaskList data={awaitedData.tasks.data as GroupedTasksResponse} />
+            <TaskSearch onSearch={handleSearch} />
+            <TaskList data={tasks.data as GroupedTasksResponse} />
 
-                        <Link to={routes.TASK.NEW} className='new-task'>+</Link>
-                    </div>
-                )}
-            </Await>
-        </Suspense>
-    );
+            <Link to={routes.TASK.NEW} className='new-task'>+</Link>
+        </div>
+    )
 }
 
 export default HomePage;
