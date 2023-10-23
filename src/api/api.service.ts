@@ -35,7 +35,7 @@ export class APIService {
         return this.http.request<string>({
             method: "GET",
             url: '/',
-            timeout: 500_000
+            timeout: 2_700_000
         })
     }
 }
