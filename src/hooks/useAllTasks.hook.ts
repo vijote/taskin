@@ -6,15 +6,21 @@ import { ApiResponse } from '../api/api.service'
 function useAllTasks(initialOptions: URLSearchParams) {
     const { data, loading, makeQuery } = useQuery<ApiResponse<Task[]>>()
 
-    const refetch = (options: URLSearchParams) => {
+    const refetch = (options: URLSearchParams, abortSignal?: AbortSignal) => {
         const tasksService = createTasksService()
-        const getTaskPromise = tasksService.getAll<Task[]>(options)
+        const getTaskPromise = tasksService.getAll<Task[]>(options, abortSignal)
 
         makeQuery(getTaskPromise)
     }
 
     useEffect(() => {
-        refetch(initialOptions)
+        const abortController = new AbortController()
+
+        refetch(initialOptions, abortController.signal)
+
+        return () => {
+            abortController.abort()
+        }
     }, []);
 
     return { data, loading, refetch }

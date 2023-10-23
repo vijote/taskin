@@ -4,9 +4,17 @@ import { Suspense } from 'react'
 
 // Styles
 import './Layout.css'
+
+// Components
 import LoadingService from "../components/LoadingService";
+import useApiServicePing from "../hooks/useApiServicePing";
 
 function Layout() {
+    // Constantly ping the api
+    // to ensure it's active
+    // while the user is using the app
+    useApiServicePing()
+
     const data = useLoaderData() as { apiStatus: string };
 
     return (

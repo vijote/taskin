@@ -7,6 +7,7 @@ export type ApiResponse<T> = {
 
 export interface HTTPRequestOptions {
     method: "POST" | "PUT" | "GET" | "DELETE"
+    signal?: AbortSignal
     data?: object
     url: string
     timeout?: number,

@@ -17,13 +17,17 @@ export type GroupedTasksResponse = {
 
 class TasksService extends APIService {
     private userId: string;
+    private onRequest: Function;
 
-    constructor(httpLib: HTTPLib, userId: string) {
+    constructor(httpLib: HTTPLib, userId: string, onRequest: Function = () => { }) {
         super(httpLib);
         this.userId = userId;
+        this.onRequest = onRequest;
     }
 
     protected async request<T>(options: HTTPRequestOptions) {
+        this.onRequest()
+
         return super.request<T>({
             ...options,
             headers: {
@@ -47,11 +51,12 @@ class TasksService extends APIService {
         });
     }
 
-    async getAll<T>(options: URLSearchParams): Promise<ApiResponse<T>> {
+    async getAll<T>(options: URLSearchParams, abortSignal?: AbortSignal): Promise<ApiResponse<T>> {
         const queryString = options.toString();
 
         return this.request<T>({
             method: 'GET',
+            signal: abortSignal,
             url: `/tasks${queryString ? '?' + queryString : ''}`,
         });
     }
@@ -80,7 +85,16 @@ class TasksService extends APIService {
 }
 
 export function createTasksService() {
-    return new TasksService(AxiosImplementation.singleton, localStorage.getItem("userId") as string);
+    function onRequest() {
+        const requestEvent = new Event("request")
+
+        document.dispatchEvent(requestEvent)
+    }
+
+    return new TasksService(
+        AxiosImplementation.singleton,
+        localStorage.getItem("userId") as string,
+        onRequest);
 }
 
 export default TasksService;
