@@ -59,7 +59,7 @@ function PillDropdown(props: PillDropdownProps) {
             <div className={`pill-dropdown ${props.className || ''}`} tabIndex={0} onClick={toggleDropdown} onBlur={() => setIsDropdownOpen(false)}>
                 <span>{selectedOption.label}</span>
                 {!props.removeEnabled && <ExpandIcon size={16} />}
-                {props.removeEnabled && someValueSelected && <CloseIcon onClick={handleRemoveClick} size={16} />}
+                {props.removeEnabled && someValueSelected && <CloseIcon testId='pill-icon' onClick={handleRemoveClick} size={16} />}
                 <div className={`dropdown-option-container ${isDropdownOpen ? 'open' : ''}`}>
                     {props.options.map(option => <PillOption
                         key={option.label}
