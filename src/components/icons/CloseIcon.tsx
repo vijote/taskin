@@ -2,11 +2,13 @@ interface ExpandIconProps {
     size: number
     className?: string
     onClick?: React.MouseEventHandler
+    testId: string
 }
 
 function CloseIcon(props: ExpandIconProps) {
     return (
         <svg
+            data-testid={props.testId}
             onClick={props.onClick}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 -960 960 960"

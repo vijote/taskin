@@ -7,7 +7,7 @@ interface LoadingServiceProps {
 
 function LoadingService(props: LoadingServiceProps) {
     return (
-        <div className="loading-service">
+        <div data-testid="loading-service" className="loading-service">
             <h2>{props.message}</h2>
             <LoadingSpinner/>
         </div>

@@ -1,3 +1,4 @@
+// Styles
 import './ErrorMessage.css'
 
 interface ErrorMessageProps {
@@ -6,7 +7,7 @@ interface ErrorMessageProps {
 
 function ErrorMessage(props: ErrorMessageProps) {
     return (
-        <div className="error-message">
+        <div data-testid="errorMessage" className="error-message">
             <p className='message'>{props.message}</p>
         </div>
     )

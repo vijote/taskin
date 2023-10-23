@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // Loaders
 import apiLoader from "../loaders/apiLoader";
+import userLoader from "../loaders/userLoader";
 
 // Pages
 import Layout from "./Layout";
@@ -11,13 +12,12 @@ import LoginPage from "./Login.page";
 import AllTasksPage from "./AllTasks.page";
 import NewTaskPage from "./NewTask.page";
 import TaskDetailPage from "./TaskDetail.page";
+import FetchingError from "./FetchingError.page";
+import NotFoundPage from "./NotFound.page";
+import ErrorBoundary from "./ErrorBoundary";
 
 // Services
 import AxiosImplementation from "../api/axiosImplementation";
-import ErrorBoundary from "./ErrorBoundary";
-import NotFoundPage from "./NotFound.page";
-import userLoader from "../loaders/userLoader";
-import FetchingError from "../errors/FetchingError";
 
 AxiosImplementation.setSingleton({
     baseURL: import.meta.env.VITE_API_URL,

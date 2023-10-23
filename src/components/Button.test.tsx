@@ -1,11 +1,10 @@
-// Imports
+// Testing utilities
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 
-// To Test
+// Component
 import Button from './Button';
 
-// Tests
 describe('Button', async () => {
     const mockedClick = vi.fn()
 

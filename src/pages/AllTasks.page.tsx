@@ -18,7 +18,7 @@ import LoadingService from "../components/LoadingService";
 function AllTasksPage() {
     useTitle("Buscar tareas | Taskin", { restoreOnUnmount: true })
 
-    const [searchParams] = useSearchParams()
+    const [searchParams, setSearchParams] = useSearchParams()
     const { data: response, loading, refetch } = useAllTasks(searchParams)
     const tasks = response?.data as Task[]
 
@@ -33,7 +33,7 @@ function AllTasksPage() {
             <Link className="link" to={routes.HOME}>Volver al inicio</Link>
             <h2>Buscar tareas </h2>
             <TaskFilters onFiltersChange={onURLParamsChange} />
-            <OrderTasksHeader onSearchParamsChange={onURLParamsChange} />
+            <OrderTasksHeader searchParams={searchParams} setSearchParams={setSearchParams} onSearchParamsChange={onURLParamsChange} />
             {tasks
                 .map(task =>
                     <TaskItem data={task} key={task.id} />
