@@ -8,7 +8,7 @@ interface PillProps {
 function Pill(props: PillProps) {
     const state = TASK_STATE[props.state]
     return (
-        <span className={`pill ${props.state}`}>{state}</span>
+        <span data-testid="pill" className={`pill ${props.state}`}>{state}</span>
     )
 }
 

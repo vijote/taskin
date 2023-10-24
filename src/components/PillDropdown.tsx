@@ -17,8 +17,8 @@ export type Option = {
 interface PillDropdownProps {
     initialValue: Option
     options: Option[]
-    label?: string
     name: string
+    label?: string
     className?: string
     onChange?: (newValue: Option) => unknown
     removeEnabled?: boolean
@@ -39,7 +39,7 @@ function PillDropdown(props: PillDropdownProps) {
         if (props.onChange) props.onChange(newValue)
     }
 
-    function handleRemoveClick(evt: React.MouseEvent) {
+    function handleRemoveClick(evt: React.MouseEvent) {        
         evt.stopPropagation()
 
         if (props.removeEnabled && props.onRemove) props.onRemove()
@@ -54,13 +54,13 @@ function PillDropdown(props: PillDropdownProps) {
     const someValueSelected = hasValueSelected()
 
     return (
-        <div className='pill-dropdown-container'>
-            <label className='dropdown-label' htmlFor={props.name}>{props.label}</label>
-            <div className={`pill-dropdown ${props.className || ''}`} tabIndex={0} onClick={toggleDropdown} onBlur={() => setIsDropdownOpen(false)}>
-                <span>{selectedOption.label}</span>
+        <div data-testid="pill-dropdown" className='pill-dropdown-container'>
+            <label data-testid="dropdown-label" className='dropdown-label' htmlFor={props.name}>{props.label}</label>
+            <div data-testid="dropdown-handle" className={`pill-dropdown ${props.className || ''}`} tabIndex={0} onClick={toggleDropdown} onBlur={() => setIsDropdownOpen(false)}>
+                <span data-testid="selected-option-label">{selectedOption.label}</span>
                 {!props.removeEnabled && <ExpandIcon size={16} />}
-                {props.removeEnabled && someValueSelected && <CloseIcon testId='pill-icon' onClick={handleRemoveClick} size={16} />}
-                <div className={`dropdown-option-container ${isDropdownOpen ? 'open' : ''}`}>
+                {props.removeEnabled && someValueSelected && <CloseIcon testId='pill-option-remove' onClick={handleRemoveClick} size={16} />}
+                <div data-testid="pill-dropdown-options" className={`dropdown-option-container ${isDropdownOpen ? 'open' : ''}`}>
                     {props.options.map(option => <PillOption
                         key={option.label}
                         onClick={onOptionClick(option)}
@@ -69,7 +69,14 @@ function PillDropdown(props: PillDropdownProps) {
                     />)}
                 </div>
             </div>
-            <input readOnly={true} value={selectedOption.value as string} type="text" name={props.name} id={props.name} hidden={true} />
+            <input
+                data-testid="selected-option-value"
+                readOnly={true}
+                value={selectedOption.value as string}
+                type="text"
+                name={props.name}
+                id={props.name}
+                hidden={true} />
         </div>
     );
 }
