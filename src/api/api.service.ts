@@ -39,6 +39,7 @@ export class APIService {
         })
     }
 }
+
 function createApiService() {
     return new APIService(AxiosImplementation.singleton)
 }
