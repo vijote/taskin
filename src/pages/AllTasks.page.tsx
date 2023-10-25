@@ -7,13 +7,14 @@ import OrderTasksHeader from "../components/OrderTasksHeader";
 import TaskFilters from "../components/TaskFilters";
 
 // Hooks
-import useAllTasks from "../hooks/useAllTasks.hook";
+import useAllTasks from "../hooks/useAllTasks";
 import useTitle from "../hooks/useTitle.hook";
 
 // Services
 import { Task } from "../api/tasks.service";
 import routes from "./routes";
 import LoadingService from "../components/LoadingService";
+import AnimatedLink from "../components/AnimatedLink";
 
 function AllTasksPage() {
     useTitle("Buscar tareas | Taskin", { restoreOnUnmount: true })
@@ -30,7 +31,7 @@ function AllTasksPage() {
 
     return (
         <section className="container">
-            <Link className="link" to={routes.HOME}>Volver al inicio</Link>
+            <AnimatedLink to={routes.HOME}>Volver al inicio</AnimatedLink>
             <h2>Buscar tareas </h2>
             <TaskFilters onFiltersChange={onURLParamsChange} />
             <OrderTasksHeader searchParams={searchParams} setSearchParams={setSearchParams} onSearchParamsChange={onURLParamsChange} />
@@ -38,8 +39,8 @@ function AllTasksPage() {
                 .map(task =>
                     <TaskItem data={task} key={task.id} />
                 )}
-            {(!tasks.length && searchParams.size) ? <p>No pudimos encontrar ninguna tarea que coincida con tus filtros 😔</p>: null}
-            {(!tasks.length && !searchParams.size) ? <p>No encontramos tareas, parece que estás al dia! 😉</p>: null}
+            {(!tasks.length && searchParams.size) ? <p>No pudimos encontrar ninguna tarea que coincida con tus filtros 😔</p> : null}
+            {(!tasks.length && !searchParams.size) ? <p>No encontramos tareas, parece que estás al dia! 😉</p> : null}
         </section>
     )
 }

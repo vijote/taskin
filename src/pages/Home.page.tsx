@@ -17,11 +17,12 @@ import useTitle from '../hooks/useTitle.hook';
 import useHomeData from '../hooks/useHomeData.hook';
 import LoadingService from '../components/LoadingService';
 import { User } from '../loaders/userLoader';
+import useAnimatedNavigation from '../hooks/useAnimatedNavigation';
 
 function HomePage() {
     useTitle("Inicio | Taskin", { restoreOnUnmount: true })
     const user = useRouteLoaderData("home") as User
-    const navigate = useNavigate()
+    const navigate = useAnimatedNavigation()
     const { data, loading } = useHomeData();
 
     function handleSearch(search: string) {
@@ -35,7 +36,7 @@ function HomePage() {
     const [tasks, count] = data
 
     return (
-        <div className='container'>
+        <div className='container' style={{viewTransitionName: "home"}}>
             <h2 className='home-title'>Hola, {user.name}</h2>
             <div className='all-tasks-header'>
                 <p className='to-do-label'>{count.data as number} tareas encontradas</p>

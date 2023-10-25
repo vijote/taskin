@@ -52,3 +52,7 @@ body {
         max-width: 40em;
     }
 }
+
+.view-transition {
+    view-transition-name: test;
+}
