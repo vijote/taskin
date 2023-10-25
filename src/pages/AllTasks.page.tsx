@@ -32,7 +32,7 @@ function AllTasksPage() {
         <section className="container">
             <Link className="link" to={routes.HOME}>Volver al inicio</Link>
             <h2>Buscar tareas </h2>
-            <TaskFilters onFiltersChange={onURLParamsChange} />
+            <TaskFilters searchParams={searchParams} setSearchParams={setSearchParams} onFiltersChange={onURLParamsChange} />
             <OrderTasksHeader searchParams={searchParams} setSearchParams={setSearchParams} onSearchParamsChange={onURLParamsChange} />
             {tasks
                 .map(task =>

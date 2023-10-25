@@ -1,20 +1,28 @@
-import { useSearchParams } from "react-router-dom"
+// React specific
+import { SetURLSearchParams } from "react-router-dom"
+
+// Components
 import PillDropdown from "./PillDropdown"
 import TaskSearch from "./TaskSearch"
+
+// Services
 import taskState from "../api/taskState"
+
+// Styles
 import './TaskFilters.css'
 
 const SEARCH_PARAM = 'filter-title'
 const STATE_PARAM = 'filter-state'
 
 interface TaskFiltersProps {
+    searchParams: URLSearchParams
+    setSearchParams: SetURLSearchParams
     onFiltersChange?: (newParams: URLSearchParams) => unknown
 }
 
 function TaskFilters(props: TaskFiltersProps) {
-    const [searchParams, setSearchParams] = useSearchParams()
-    const searchFilter = searchParams.get(SEARCH_PARAM)
-    const stateFilter = searchParams.get(STATE_PARAM)
+    const searchFilter = props.searchParams.get(SEARCH_PARAM)
+    const stateFilter = props.searchParams.get(STATE_PARAM)
 
     const defaultStateValue = {
         value: stateFilter || "",
@@ -37,16 +45,16 @@ function TaskFilters(props: TaskFiltersProps) {
     ]
 
     const handleFilterChange = (filter: string) => (newValue?: string) => {
-        const newParams = new URLSearchParams(searchParams)
+        const newParams = new URLSearchParams(props.searchParams)
         if (!newValue) newParams.delete(filter)
         else newParams.set(filter, newValue)
 
-        setSearchParams(newParams)
+        props.setSearchParams(newParams)
         if (props.onFiltersChange) props.onFiltersChange(newParams)
     }
 
     return (
-        <div className="filters-header">
+        <div data-testid="task-filters" className="filters-header">
             <TaskSearch defaultValue={searchFilter as string} onSearch={handleFilterChange(SEARCH_PARAM)} />
             <PillDropdown
                 label="Buscar por estado"

@@ -52,7 +52,7 @@ function TaskEdit(props: TaskEditProps) {
     }
 
     return (
-        <>
+        <div data-testid="task-edit">
             <h2 className="mt-1">Editar tarea</h2>
             {props.error ? <ErrorMessage message={props.error}/> : null}
             <form onSubmit={handleSubmit}>
@@ -63,7 +63,7 @@ function TaskEdit(props: TaskEditProps) {
                 <TextArea defaultValue={props.content} label="Descripción" name="content" />
                 <Button className="submit-task-button" label="Actualizar" loading={props.submitting} type="submit" />
             </form>
-        </>
+        </div>
     )
 }
 

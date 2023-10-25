@@ -10,7 +10,6 @@ function useApiServicePing() {
     function sendPingRequest() {
         // If a request was recently made
         // there's no need for a wake up
-        
         if (!shouldPingRef.current) return
 
         createApiService().checkApiStatus()

@@ -1,8 +1,15 @@
+// React specific
 import { Link } from "react-router-dom";
+
+// Components
 import Pill from "./Pill";
+
+// Services
 import { Task } from "../api/tasks.service";
-import './TaskItem.css'
 import routes from "../pages/routes";
+
+// Styles
+import './TaskItem.css'
 
 interface TaskProps {
     data: Task

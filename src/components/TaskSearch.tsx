@@ -16,9 +16,10 @@ function TaskSearch(props: TaskSearchProps) {
 
         props.onSearch(encodeURIComponent(search as string))
     }
+    
     return (
-        <form onSubmit={handleSubmit}>
-            <Input defaultValue={props.defaultValue} label='Buscar por nombre' name='search' type='text' />
+        <form data-testid="task-search" onSubmit={handleSubmit}>
+            <Input defaultValue={props.defaultValue} label='Buscar por nombre' name='search' type='search' />
         </form>
     )
 }

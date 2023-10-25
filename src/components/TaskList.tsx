@@ -1,9 +1,15 @@
+// React specific
+import { Link } from "react-router-dom";
+
+// Services
 import { GroupedTasksResponse } from "../api/tasks.service";
 import routes from "../pages/routes";
+
+// Components
 import TaskItem from "./TaskItem";
 
+// Styles
 import './TaskList.css'
-import { Link } from "react-router-dom";
 
 interface TaskListProps {
     data: GroupedTasksResponse
