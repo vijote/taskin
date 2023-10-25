@@ -44,9 +44,10 @@ class TasksService extends APIService {
         });
     }
 
-    async getAllGroupedByState(): Promise<ApiResponse<GroupedTasksResponse>> {
+    async getAllGroupedByState(abortSignal?: AbortSignal): Promise<ApiResponse<GroupedTasksResponse>> {
         return this.request<GroupedTasksResponse>({
             method: 'GET',
+            signal: abortSignal,
             url: '/tasks/grouped-by-state',
         });
     }
@@ -61,9 +62,10 @@ class TasksService extends APIService {
         });
     }
 
-    async get(id: string): Promise<ApiResponse<Task>> {
+    async get(id: string, abortSignal?: AbortSignal): Promise<ApiResponse<Task>> {
         return this.request<Task>({
             method: 'GET',
+            signal: abortSignal,
             url: `/tasks/${encodeURIComponent(id)}`,
         });
     }

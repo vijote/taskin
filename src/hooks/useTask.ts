@@ -14,10 +14,16 @@ function useTask(id: string) {
     }
 
     useEffect(() => {
+        const taskController = new AbortController()
+
         const tasksService = createTasksService()
-        const getTaskPromise = tasksService.get(id)
+        const getTaskPromise = tasksService.get(id, taskController.signal)
 
         makeQuery(getTaskPromise)
+
+        return () => {
+            taskController.abort()
+        }
     }, []);
 
     return { data, loading, refetch }

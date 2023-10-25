@@ -12,14 +12,21 @@ function useHomeData() {
     const { data, loading, makeQuery } = useQuery<[ApiResponse<GroupedTasksResponse>, ApiResponse<number>]>()
 
     useEffect(() => {
+        const countController = new AbortController()
+        const taskController = new AbortController()
         const tasksService = createTasksService()
 
         const getHomeDataPromise = Promise.all([
-            tasksService.getAllGroupedByState(),
-            tasksService.getAll<number>(new URLSearchParams({ isCount: "true" })),
+            tasksService.getAllGroupedByState(countController.signal),
+            tasksService.getAll<number>(new URLSearchParams({ isCount: "true" }), countController.signal),
         ])
 
         makeQuery(getHomeDataPromise)
+
+        return () => {
+            countController.abort()
+            taskController.abort()
+        }
     }, []);
 
     return { data, loading }
